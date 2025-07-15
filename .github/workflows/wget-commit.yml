@@ -1,31 +1,32 @@
-name: Wget and Commit Site
+name: Mirror Website and Commit
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch:
 
 jobs:
-  wget-and-commit:
+  mirror-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        persist-credentials: true
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0  # needed for committing
 
-    - name: Run wget to mirror site
-      run: |
-        mkdir -p mirrored_site
-        cd mirrored_site
-        wget -m -p -E -k https://www.walkertapeco.com
+      - name: Run wget to mirror website
+        run: |
+          mkdir -p mirrored_site
+          cd mirrored_site
+          wget -m -p -E -k https://www.walkertapeco.com
 
-    - name: Configure Git
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Configure Git
+        run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
 
-    - name: Commit changes
-      run: |
-        git add mirrored_site
-        git commit -m "Add mirrored website from walkertapeco.com"
-        git push
+      - name: Commit and push
+        run: |
+          git add -A
+          git commit -m "Add mirrored copy of walkertapeco.com" || echo "No changes to commit"
+          git push
