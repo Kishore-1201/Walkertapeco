@@ -1,7 +1,7 @@
 name: HTTrack Clone and Commit
 
 on:
-  workflow_dispatch:  # Manually trigger from GitHub Actions tab
+  workflow_dispatch:  # Trigger manually from Actions tab
 
 jobs:
   clone-and-commit:
@@ -15,13 +15,15 @@ jobs:
           fetch-depth: 0
 
       - name: Install HTTrack
-        run: sudo apt-get update && sudo apt-get install httrack -y
+        run: |
+          sudo apt-get update
+          sudo apt-get install httrack -y
 
       - name: Clone website using HTTrack
         run: |
           mkdir -p mirrored_site
           httrack "https://www.walkertapeco.com" -O ./mirrored_site -%v
-          echo "===== HTTrack Download Complete ====="
+          echo "✅ HTTrack download complete"
 
       - name: Show downloaded files
         run: ls -R mirrored_site
@@ -34,5 +36,10 @@ jobs:
       - name: Commit and push downloaded site
         run: |
           git add mirrored_site/*
-          git commit -m "✅ Cloned walkertapeco.com using HTTrack"
-          git push
+          git commit -m "✅ Cloned walkertapeco.com using HTTrack" || echo "⚠️ No changes to commit"
+
+          # Pull latest changes to avoid push conflicts
+          git pull --rebase origin main
+
+          # Push after rebasing
+          git push origin main
