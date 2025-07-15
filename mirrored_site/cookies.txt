@@ -1,0 +1,14 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	JSESSIONID	3twraALyeGuRR0YNJp0JKo-XdI0Hj4hsB4VnX_fAzMNHoWC3UxUMlnwsM6G7OQh8LmL2Ie0gjfmZ6gOW-v60b3lkKRoBx64ZW_Ldg4hmIakXuVMvJFik8yQrOtx3EqDr!-1373340899
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SameSite	Lax
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	NS_VER	2025.1
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	jsid_own	8359882.1528069931
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	NLShopperId2	xra7VAZaA6FQNhbU
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	NLVisitorId	GEimdAZaA6NQNjEM
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SSPOperationId_246c9bcf	f233b46d-192c-4c5e-aeb2-a7ee1e76f997
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SSPOperationId_2b614370	dc69f7f9-76b9-49dd-920e-bfba7ba5edfc
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SSPOperationId_91d94246	9fae1196-193e-4c62-a5dd-da833d75fc08
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SSPOperationId_6706030	52a8cd90-1e65-410d-b2f8-57627fdba555
+www.walkertapeco.com	TRUE	/	FALSE	1999999999	SSPOperationId_845764fc	1cd19f2d-f196-4577-b71d-81f3732fc31f
+
