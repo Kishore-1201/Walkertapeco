@@ -1,31 +1,27 @@
-name: Mirror WalkerTape and Commit
+name: HTTrack Clone and Commit
 
 on:
-  workflow_dispatch:  # Manual trigger from Actions tab
+  workflow_dispatch:  # Manually trigger from GitHub Actions tab
 
 jobs:
-  download-and-commit:
+  clone-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
         with:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Ensure git is installed
-        run: |
-          git --version || sudo apt-get update && sudo apt-get install git -y
+      - name: Install HTTrack
+        run: sudo apt-get update && sudo apt-get install httrack -y
 
-      - name: Create folder and mirror website with wget
+      - name: Clone website using HTTrack
         run: |
           mkdir -p mirrored_site
-          cd mirrored_site
-          wget -m -p -E -k \
-            --user-agent="Mozilla/5.0 (Linux; Android 10; M2006C3MII)" \
-            https://www.walkertapeco.com
-          cd ..
+          httrack "https://www.walkertapeco.com" -O ./mirrored_site -%v
+          echo "===== HTTrack Download Complete ====="
 
       - name: Show downloaded files
         run: ls -R mirrored_site
@@ -35,10 +31,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Commit and push changes
+      - name: Commit and push downloaded site
         run: |
-          git add -A
-          git diff --cached --quiet && echo "No new files to commit" || (
-            git commit -m "✅ Mirrored site: walkertapeco.com (completed successfully)"
-            git push
-          )
+          git add mirrored_site/*
+          git commit -m "✅ Cloned walkertapeco.com using HTTrack"
+          git push
